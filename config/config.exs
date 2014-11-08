@@ -26,8 +26,8 @@ config :logger, :console,
   metadata: [:request_id]
 
 config :code_for_conduct, CodeForConduct.PageController,
-  client_id: [System.get_env("EVENTBRITE_ID") || raise "EVENTBRITE_ID not found"],
-  client_secret: [System.get_env("EVENTBRITE_SECRET") || raise "EVENTBRITE_SECRET not found"]
+  client_id: [System.get_env("EVENTBRITE_ID")],
+  client_secret: [System.get_env("EVENTBRITE_SECRET")]
 
 # Import environment specific config. This must remain at the bottom
 # of this file so it overrides the configuration defined above.
