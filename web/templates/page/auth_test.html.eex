@@ -3,5 +3,5 @@
   <p class="lead">Phoenix is an Elixir Web Framework targeting full-featured, fault tolerant applications with realtime functionality.</p>
 </div>
 
-<p>Your code is: <%= @code %></p>
+<p>Your token is: <%= @token%></p>
 
