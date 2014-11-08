@@ -4,10 +4,18 @@ defmodule CodeForConduct.PageController do
   import Poison
   import EventBrite
 
+  alias CodeForConduct.Router
+
   plug :action
 
   def index(conn, _params) do
-    render conn, "index"
+    case get_session(conn, :eb_token) do
+      nil ->
+        redirect conn, CodeForConduct.Router.Helpers.pages_path(:auth)
+      token ->
+        %{"name" => name, "emails" => emails} = EventBrite.get_user_info(token)
+        render conn, "index", name: name, emails: emails
+    end
   end
 
 
@@ -32,8 +40,9 @@ defmodule CodeForConduct.PageController do
   def auth(conn, %{"code" => code}) do
     IO.puts "i got a code " <> code
     token = get_token(code)
-    %{"name" => name, "emails" => emails} = EventBrite.get_user_info(token)
-    render conn, "auth_test", token: token, name: name, emails: emails
+    conn = put_session(conn, :eb_token, token)
+    dest = CodeForConduct.Router.Helpers.pages_path(:index)
+    redirect conn, "/" # dest doesn't really seem to work right
   end
 
   def auth(conn, _params) do
