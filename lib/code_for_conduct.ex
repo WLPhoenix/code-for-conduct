@@ -1,5 +1,6 @@
 defmodule CodeForConduct do
   use Application
+  alias CodeForConduct.Repo
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
@@ -11,6 +12,7 @@ defmodule CodeForConduct do
     children = [
       # Define workers and child supervisors to be supervised
       # worker(CodeForConduct.Worker, [arg1, arg2, arg3])
+      worker(Repo, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html
