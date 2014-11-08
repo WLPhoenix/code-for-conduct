@@ -34,7 +34,7 @@ defmodule CodeForConduct.PageController do
       {:ok, %HTTPoison.Response{status_code: 200, body: body, }} ->
         case Poison.decode body do
 					{:ok, %{"access_token" => token}} ->
-						{:ok, token}
+						token
 					{:error, r} ->
 						raise r
         end
