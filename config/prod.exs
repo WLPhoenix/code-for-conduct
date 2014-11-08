@@ -18,3 +18,5 @@ config :phoenix, CodeForConduct.Router,
 
 config :logger, :console,
   level: :info
+
+config :phoenix, :code_reloader, true
