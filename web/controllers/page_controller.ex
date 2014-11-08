@@ -11,15 +11,24 @@ defmodule CodeForConduct.PageController do
   end
 
 
+  def build_body(code) do
+    IO.puts "Building auth body for code: " <> code
+  	env = Application.get_env(:code_for_conduct, CodeForConduct.PageController)
+		client_id = env[:client_id]
+  	client_secret = env[:client_secret]
+		{:ok, "code=#{code}&grant_type=authorization_code&client_id=#{client_id}&client_secret=#{client_secret}"}
+  end
+
   defp get_token(code) do
-    body = "code=#{code}&grant_type=authorization_code&client_secret=CDRPVW63YBXLHSPGL4Q25AFJKTXC7EYWOJ6LOQEE3UDIOABT6N&client_id=7EBFEB24BRVOV6J5KG"
+	  {:ok, body} = build_body(code)
+
     case HTTPoison.post("https://www.eventbrite.com/oauth/token", body, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body, }} ->
         case Poison.decode body do
-        {:ok, %{"access_token" => token}} ->
-          token
-        {:error, r} ->
-          raise r
+					{:ok, %{"access_token" => token}} ->
+						{:ok, token}
+					{:error, r} ->
+						raise r
         end
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
         raise "Got #{status_code} (#{body})..."
@@ -27,7 +36,6 @@ defmodule CodeForConduct.PageController do
         raise reason
     end
   end
-    
 
   def auth(conn, %{"code" => code}) do
     IO.puts "i got a code " <> code
@@ -38,7 +46,9 @@ defmodule CodeForConduct.PageController do
 
   def auth(conn, _params) do
     IO.puts "just tryin to auth man"
-    redirect conn, "https://www.eventbrite.com/oauth/authorize?response_type=code&client_id=7EBFEB24BRVOV6J5KG"
+  	env = Application.get_env(:code_for_conduct, CodeForConduct.PageController)
+		client_id = env[:client_id]
+    redirect conn, "https://www.eventbrite.com/oauth/authorize?response_type=code&client_id=#{client_id}"
   end
 
   def not_found(conn, _params) do
