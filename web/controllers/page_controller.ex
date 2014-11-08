@@ -10,13 +10,15 @@ defmodule CodeForConduct.PageController do
 
   def auth(conn, %{"code" => code}) do
     IO.puts "i got a code " <> code
-    case HTTPoison.get("http://google.com") do
+    body = "code=#{code}&grant_type=authorization_code&client_secret=CDRPVW63YBXLHSPGL4Q25AFJKTXC7EYWOJ6LOQEE3UDIOABT6N&client_id=7EBFEB24BRVOV6J5KG"
+#    case HTTPoison.post("http://localhost:9000", body, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
+    case HTTPoison.post("https://www.eventbrite.com/oauth/token", body, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        IO.puts body
-      {:ok, %HTTPoison.Response{status_code: 404}} ->
-        IO.puts "Not found :-("
-      {:ok, %HTTPoison.Response{status_code: status_code}} ->
-        IO.puts "I got a different code #{status_code} -- what the hell?"
+        IO.puts "BODY :: [[#{body}]]"
+      {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
+        IO.puts "Not found :-( #{body}"
+      {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+        IO.puts "I got a different code #{status_code} -- what the hell? #{body}"
       {:error, %HTTPoison.Error{reason: reason}} ->
         IO.inspect reason
     end
