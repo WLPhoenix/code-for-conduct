@@ -7,7 +7,13 @@
   You are: <%= @name%>. You have these emails <%= @emails %>:
   <ul>
   <%= for email <- @emails do %>
-    <li><%= @email %></li>
+    <li><%= email %></li>
+  <% end %>
+  </ul>
+  Events:
+  <ul>
+  <%= for event <- @events do %>
+    <li><%= event.name %> -- <%= event.id %></li>
   <% end %>
   </ul>
 </p>

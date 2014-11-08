@@ -14,7 +14,7 @@ defmodule CodeForConduct.PageController do
         redirect conn, CodeForConduct.Router.Helpers.pages_path(:auth)
       token ->
         %{"name" => name, "emails" => emails} = EventBrite.get_user_info(token)
-        render conn, "index", name: name, emails: emails
+        render conn, "index", name: name, emails: emails, events: EventBrite.get_event_info(token)
     end
   end
 
