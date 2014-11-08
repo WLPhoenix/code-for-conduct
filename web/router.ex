@@ -6,6 +6,7 @@ defmodule CodeForConduct.Router do
     pipe_through :browser
 
     get "/", CodeForConduct.PageController, :index, as: :pages
+    get "/auth", CodeForConduct.PageController, :auth, as: :pages
   end
 
   # Other scopes may use custom stacks.
