@@ -15,7 +15,7 @@ defmodule CodeForConduct.Mixfile do
   # Type `mix help compile.app` for more information
   def application do
     [mod: {CodeForConduct, []},
-     applications: [:phoenix, :cowboy, :logger]]
+     applications: [:phoenix, :cowboy, :logger, :postgrex, :ecto]]
   end
 
   # Specifies your project dependencies
@@ -24,6 +24,9 @@ defmodule CodeForConduct.Mixfile do
   defp deps do
     [{:phoenix, "0.5.0"},
      {:cowboy, "~> 1.0"},
-	 {:httpoison, "~> 0.5"}]
+		 {:httpoison, "~> 0.5"},
+		 {:postgrex, ">= 0.0.0"},
+		 {:ecto, "~> 0.2.0"}
+		]
   end
 end
