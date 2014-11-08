@@ -11,7 +11,6 @@ defmodule CodeForConduct.PageController do
   def auth(conn, %{"code" => code}) do
     IO.puts "i got a code " <> code
     body = "code=#{code}&grant_type=authorization_code&client_secret=CDRPVW63YBXLHSPGL4Q25AFJKTXC7EYWOJ6LOQEE3UDIOABT6N&client_id=7EBFEB24BRVOV6J5KG"
-#    case HTTPoison.post("http://localhost:9000", body, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
     case HTTPoison.post("https://www.eventbrite.com/oauth/token", body, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         IO.puts "BODY :: [[#{body}]]"
