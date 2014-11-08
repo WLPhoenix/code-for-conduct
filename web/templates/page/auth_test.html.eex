@@ -5,3 +5,12 @@
 
 <p>Your token is: <%= @token%></p>
 
+<p>
+  You are: <%= @name%>. You have these emails <%= @emails %>:
+  <ul>
+  <%= for email <- @emails do %>
+    <li><%= @email %></li>
+  <% end %>
+  </ul>
+</p>
+
