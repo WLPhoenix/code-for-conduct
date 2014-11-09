@@ -1,0 +1,15 @@
+<div class="jumbotron">
+  <h2>Welcome to Phoenix!</h2>
+  <p class="lead">Phoenix is an Elixir Web Framework targeting full-featured, fault tolerant applications with realtime functionality.</p>
+</div>
+
+<p>
+    <form action="/question" method="post">
+      <div class="form-group">
+        <input type="text" name="ebid" class="form-control" />
+        <input type="text" name="questions" class="form-control" />
+      </div>
+      <button type="submit" class="btn btn-primary">Create</button>
+    </form>
+</p>
+
