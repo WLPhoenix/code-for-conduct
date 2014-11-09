@@ -8,7 +8,7 @@
   "ibrowse": {:git, "git://github.com/cmullaparthi/ibrowse.git", "7871e2ebe8811efb64e1917e2de455fa87e8dfe3", [tag: "v4.1.0"]},
   "idna": {:hex, :idna, "1.0.1"},
   "linguist": {:hex, :linguist, "0.1.2"},
-  "phoenix": {:hex, :phoenix, "0.5.0"},
+  "phoenix": {:git, "git://github.com/phoenixframework/phoenix.git", "dd21cda538a96adeb6233645993c20cba42709c7", [branch: "master"]},
   "plug": {:hex, :plug, "0.8.2"},
   "poison": {:hex, :poison, "1.2.0"},
   "poolboy": {:hex, :poolboy, "1.2.1"},

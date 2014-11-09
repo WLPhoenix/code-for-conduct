@@ -11,7 +11,7 @@ defmodule CodeForConduct.PageController do
   def index(conn, _params) do
     case get_session(conn, :eb_token) do
       nil ->
-        redirect conn, CodeForConduct.Router.Helpers.pages_path(:auth)
+        redirect conn, to: CodeForConduct.Router.Helpers.pages_path(:auth)
       token ->
         %{"name" => name, "emails" => emails} = EventBrite.get_user_info(token)
         render conn, "index", name: name, emails: emails, events: EventBrite.get_event_info(token)
@@ -50,14 +50,14 @@ defmodule CodeForConduct.PageController do
     token = get_token(code)
     conn = put_session(conn, :eb_token, token)
     dest = CodeForConduct.Router.Helpers.pages_path(:index)
-    redirect conn, "/" # dest doesn't really seem to work right
+    redirect conn, to: "/" # dest doesn't really seem to work right
   end
 
   def auth(conn, _params) do
     IO.puts "just tryin to auth man"
   	env = Application.get_env(:code_for_conduct, CodeForConduct.PageController)
 		client_id = env[:client_id]
-    redirect conn, "https://www.eventbrite.com/oauth/authorize?response_type=code&client_id=#{client_id}"
+    redirect conn, to: "https://www.eventbrite.com/oauth/authorize?response_type=code&client_id=#{client_id}"
   end
 
   def not_found(conn, _params) do
