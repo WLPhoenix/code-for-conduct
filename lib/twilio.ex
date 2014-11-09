@@ -1,7 +1,7 @@
 defmodule Twilio do
 
-  account_sid = [System.get_env("TWILIO_SID") || raise "Twilio SID missing."]
-  auth_token = [System.get_env("TWILIO_TOKEN") || raise "Twilio AuthToken missing."]
+  account_sid = System.get_env("TWILIO_SID") # || raise "Twilio SID missing."]
+  auth_token = System.get_env("TWILIO_TOKEN") # || raise "Twilio AuthToken missing."]
 
 	url = ["https://#{account_sid}:#{auth_token}@api.twilio.com",
 				 "/2010-04-01/Accounts/#{account_sid}/Messages"] |> Enum.join ""
