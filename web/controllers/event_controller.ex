@@ -31,6 +31,6 @@ defmodule CodeForConduct.EventController do
   end
 
   defp ure(e) do
-    %{ :ebid => e.ebid, :id => e.id, :ownerid => e.ownerid }
+    %{ :ebid => e.ebid, :id => e.id, :ownerid => e.ownerid, :cofc => e.cofc }
   end
 end

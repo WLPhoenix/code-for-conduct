@@ -55,4 +55,23 @@ defmodule EventBrite do
         raise reason
     end
   end
+
+  def get_single_event_info(token, event_id) do
+    u = "https://www.eventbriteapi.com/v3/events/#{event_id}/?token=#{token}"
+    IO.puts u
+   
+    case HTTPoison.get(u) do
+      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+        case Poison.decode body do
+          {:ok, event} ->
+            parse_single_event(event)
+          {:error, r} ->
+            raise r
+        end
+      {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
+        raise "Got #{status_code} (#{body})..."
+      {:error, %HTTPoison.Error{reason: reason}} ->
+        raise reason
+    end
+  end
 end

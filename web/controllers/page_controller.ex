@@ -8,6 +8,10 @@ defmodule CodeForConduct.PageController do
 
   plug :action
 
+  def idx(conn, _) do
+    render conn, "idx.html"
+  end
+
   def index(conn, _params) do
     case get_session(fetch_session(conn), :eb_token) do
       nil ->
