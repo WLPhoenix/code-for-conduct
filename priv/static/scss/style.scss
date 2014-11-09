@@ -25,9 +25,33 @@ p.normal {
     .navbar-brand {
       color: #fff;
       font-size: 3.6rem;
-      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
     }
   }
+  &.filled {
+    background-color: #FFD34E;
+    -webkit-transition: all 500ms ease-in;
+    -moz-transition: all 500ms ease-in;
+    -ms-transition: all 500ms ease-in;
+    -o-transition: all 500ms ease-in;
+    transition: all 500ms ease-in;
+    -webkit-box-shadow: 1px 0 3px 0 rgba(0,0,0,0.3);
+    box-shadow: 1px 0 3px 0 rgba(0,0,0,0.3);
+  }
+}
+
+.btn-primary {
+  background-color: transparent;
+  -webkit-border-radius: 40px;
+  border-radius: 40px;
+  line-height: 60px;
+  font-style: 2.4rem;
+  padding: 0 20px;
+  border-width: 3px;
+  -webkit-transition: all 100ms ease-in;
+  -moz-transition: all 100ms ease-in;
+  -ms-transition: all 100ms ease-in;
+  -o-transition: all 100ms ease-in;
+  transition: all 100ms ease-in;
 }
 
 /** Phone **/
@@ -44,13 +68,6 @@ p.normal {
 }
 
 @media (min-width: 768px) {
-  button.join-now {
-    border-radius: 20px;
-    background: rgba(1,1,1,0);
-    color:rgb(10,72,81);
-    border-color:rgb(10,72,81);
-    border-width:3px
-  }
 
   .header-overlay-txt {
     position: absolute;
@@ -62,15 +79,6 @@ p.normal {
     color: white;
   }
 
-}
-
-button.join-now {
-  border-radius: 20px;
-  background: rgba(1,1,1,0);
-  color:rgb(10,72,81);
-  border-color:rgb(10,72,81);
-  border-width: 3px;
-  margin: auto;
 }
 
 .concert-overlay-txt {
@@ -93,12 +101,11 @@ img.header {
 .dark-red {
   color: rgb(173,50,33);
   border-color: rgb(173,50,33);
-}
-
-.custom-button {
-border-radius: 20px;
-background: rgba(1,1,1,0);
-border-width:3px;
+  &:hover {
+    background-color: rgb(173,50,33);
+    color: #FFF;
+    border-color: rgb(173,50,33);
+  }
 }
 
 .box {
