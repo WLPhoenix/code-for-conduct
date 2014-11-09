@@ -16,7 +16,7 @@ defmodule Twilio do
 		IO.puts content
 
     case HTTPoison.post(url, content, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
+      {:ok, %HTTPoison.Response{status_code: code, body: body}} when code >= 200 and code < 300 ->
         IO.puts Poison.decode body
       {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
         IO.puts "Not found :-( #{body}"
