@@ -10,11 +10,13 @@ defmodule CodeForConduct.Router do
     plug :accepts, ~w(json)
   end
 
-  scope "/" do
+  scope alias: CodeForConduct do
     pipe_through :browser # Use the default browser stack
 
-    get "/", CodeForConduct.PageController, :index
-    get "/auth", CodeForConduct.PageController, :auth, as: :pages
+    get "/", PageController, :index
+    get "/auth", PageController, :auth, as: :page
+    resources "events", EventController
+
   end
 
   # Other scopes may use custom stacks.
