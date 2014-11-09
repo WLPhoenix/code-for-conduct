@@ -26,8 +26,8 @@ defmodule EventBrite do
     end
   end
 
-  defp parse_single_event(%{"name" => %{"text" => name}, "id" => id, "venue" => %{"address" => address}, "start" => %{"local" => starttime}, "end" => %{"local" => endtime}}) do
-    %{ :id => id, :name => name, :address => address, :start => starttime, :end => endtime }
+  defp parse_single_event(%{"name" => %{"text" => name}, "id" => id, "venue" => %{"address" => address}, "start" => %{"local" => starttime}, "end" => %{"local" => endtime}, "category" => %{ "name" => etype}}) do
+    %{ :id => id, :name => name, :address => address, :start => starttime, :end => endtime, :etype => etype, :email => "organizer@example.com", :phone => "615-867-5309"}
   end
 
   defp parse_events([event|more_events]) do
