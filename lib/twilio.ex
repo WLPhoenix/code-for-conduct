@@ -1,31 +1,25 @@
-import HTTPoison
-
 defmodule Twilio do
 
-  account_sid = System.get_env("TWILIO_SID") || raise "Twilio SID missing."
-  auth_token = System.get_env("TWILIO_TOKEN") || raise "Twilio AuthToken missing."
+	defp build_url() do
+		account_sid = System.get_env("TWILIO_SID")
+		auth_token = System.get_env("TWILIO_TOKEN")
 
-	url = ["https://#{account_sid}:#{auth_token}@api.twilio.com",
-				 "/2010-04-01/Accounts/#{account_sid}/Messages"] |> Enum.join ""
-	@url url
+		url = ["https://#{account_sid}:#{auth_token}@api.twilio.com",
+					 "/2010-04-01/Accounts/#{account_sid}/Messages"] |> Enum.join ""
+	end
 
   def send_sms(to, from, body) do
-    content = %{
-                "To": to,
-                "From": from,
-                "Body": body
-            }
+    content = "To=#{to}&From=#{from}&Body=#{body}"
+		url = build_url()
 
-    case Poison.encode content do
-      {:ok, json} -> enc_content = json
-      {:error, r} -> raise r
-    end
+		IO.puts url
+		IO.puts content
 
-    case HTTPoison.post(@url, enc_content, [{<<"Content-Type">>, <<"application/json">>}]) do
-      {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        IO.puts "BODY :: [[#{content}]]"
+    case HTTPoison.post(url, content, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
+      {:ok, %HTTPoison.Response{status_code: code, body: body}} when code >= 200 and code < 300 ->
+        IO.puts Poison.decode body
       {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
-        IO.puts "Not found :-( #{content}"
+        IO.puts "Not found :-( #{body}"
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
         IO.puts "I got a different code #{status_code} -- what the hell? #{body}"
       {:error, %HTTPoison.Error{reason: reason}} ->
@@ -34,5 +28,15 @@ defmodule Twilio do
   end
 
 
-  def send_report_sms()
+  def send_report_sms(reporter, event_title, to_list) do
+
+		from_number = System.get_env("TWILIO_FROM_NUMBER")
+		message = ["The following concern has been submitted by",
+							 "#{reporter} regarding the",
+							 "#{event_title} event for your review."] |> Enum.join " "
+
+		for to_number <- to_list do
+			send_sms(to_number, from_number, message)
+		end
+	end
 end
