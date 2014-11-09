@@ -16,5 +16,3 @@ config :phoenix, CodeForConduct.Router,
   http: [port: System.get_env("PORT")],
   secret_key_base: "S85DauV7FPE/+1e8YkrC7O2WCmAkY02JYdwKfSoxsp4dFqbbquy2dIl+idIVFHi9AxlXMTU7CYogkKpSdaeFTw=="
 
-config :logger,
-  level: :info
