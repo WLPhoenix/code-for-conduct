@@ -15,15 +15,20 @@ defmodule Twilio do
             }
 
     case Poison.encode content do
-      {:ok, json} -> enc_content = json
-      {:error, r} -> raise r
+      {:ok, json} ->
+				enc_content = json
+      {:error, r} ->
+				raise r
     end
+
+		IO.puts @url
+		IO.puts enc_content
 
     case HTTPoison.post(@url, enc_content, [{<<"Content-Type">>, <<"application/json">>}]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
-        IO.puts "BODY :: [[#{content}]]"
+        IO.puts Poison.decode body
       {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
-        IO.puts "Not found :-( #{content}"
+        IO.puts "Not found :-( #{body}"
       {:ok, %HTTPoison.Response{status_code: status_code, body: body}} ->
         IO.puts "I got a different code #{status_code} -- what the hell? #{body}"
       {:error, %HTTPoison.Error{reason: reason}} ->
