@@ -15,8 +15,9 @@ defmodule CodeForConduct.Router do
 
     get "/", PageController, :index
     get "/auth", PageController, :auth, as: :page
-    resources "events", EventController
-
+    resources "events", EventController do 
+      resources "reports", ReportController
+    end
   end
 
   # Other scopes may use custom stacks.

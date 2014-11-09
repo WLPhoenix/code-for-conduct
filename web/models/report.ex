@@ -7,7 +7,7 @@ defmodule CodeForConduct.Report do
     reporterId: present(),
     complaint: present()
 
-  schema "events" do
+  schema "reports" do
     belongs_to :event, Event
     field :reporterid, :string
     field :complaint, :string
