@@ -1,14 +1,18 @@
 defmodule CodeForConduct do
   use Application
+  alias CodeForConduct.Repo
 
   # See http://elixir-lang.org/docs/stable/elixir/Application.html
   # for more information on OTP Applications
   def start(_type, _args) do
     import Supervisor.Spec, warn: false
+    import HTTPoison
+    HTTPoison.start()
 
     children = [
       # Define workers and child supervisors to be supervised
       # worker(CodeForConduct.Worker, [arg1, arg2, arg3])
+      worker(Repo, []),
     ]
 
     # See http://elixir-lang.org/docs/stable/elixir/Supervisor.html

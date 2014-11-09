@@ -19,6 +19,10 @@ config :phoenix, CodeForConduct.Router,
   session: [store: :cookie,
             key: "_code_for_conduct_key"]
 
+config :code_for_conduct, CodeForConduct.PageController,
+  client_id: [System.get_env("EVENTBRITE_ID")],
+  client_secret: [System.get_env("EVENTBRITE_SECRET")]
+
 # Configures Elixir's Logger
 config :logger, :console,
   format: "$time $metadata[$level] $message\n",
