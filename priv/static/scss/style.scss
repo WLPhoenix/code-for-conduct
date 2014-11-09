@@ -1,0 +1,148 @@
+html {
+  font-style: 62.5%;
+}
+
+.concert-img-col {
+  padding:0;
+  border-right: 1px solid white;
+}
+
+p.normal {
+  font-size: 24px;
+}
+
+.navbar {
+  min-height: 36px;
+  margin-bottom: 0;
+  background-color: transparent;
+  position: fixed;
+  top: 0;
+  z-index: 100;
+  border: none;
+  font-weight: bold;
+  .navbar-header {
+    padding: 30px 15px;
+    .navbar-brand {
+      color: #fff;
+      font-size: 3.6rem;
+      text-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+  }
+}
+
+/** Phone **/
+@media (max-width: 767px) {
+  .header-overlay-txt {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    text-align: center;
+    font-size: 36px;
+    color: white;
+  }
+}
+
+@media (min-width: 768px) {
+  button.join-now {
+    border-radius: 20px;
+    background: rgba(1,1,1,0);
+    color:rgb(10,72,81);
+    border-color:rgb(10,72,81);
+    border-width:3px
+  }
+
+  .header-overlay-txt {
+    position: absolute;
+    width: 100%;
+    top: 30%;
+    left: 2%;
+    text-align: left;
+    font-size: 36px;
+    color: white;
+  }
+
+}
+
+button.join-now {
+  border-radius: 20px;
+  background: rgba(1,1,1,0);
+  color:rgb(10,72,81);
+  border-color:rgb(10,72,81);
+  border-width: 3px;
+  margin: auto;
+}
+
+.concert-overlay-txt {
+  position: absolute;
+  width: 100%;
+  top: 20%;
+  text-align: center;
+  font-size: 24px;
+  color: white;
+}
+
+img.header {
+  height: 100%;
+}
+
+.header-content {
+  min-height: 350px
+}
+
+.dark-red {
+  color: rgb(173,50,33);
+  border-color: rgb(173,50,33);
+}
+
+.custom-button {
+border-radius: 20px;
+background: rgba(1,1,1,0);
+border-width:3px;
+}
+
+.box {
+  outline: 1px solid grey;
+}
+
+.box-header {
+  background-color: rgb(17, 73, 80);
+  color: white;
+}
+
+.box-title {
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+ol{
+    padding-left: 0;
+    margin-left: 0;
+  }
+
+  ol>li {
+    list-style-type: none;
+  }
+
+  ol>li input[type=radio] {
+    display: -moz-inline-box;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  ol>li label {
+    font-weight: normal;
+    margin-left: 10px;
+    display: -moz-inline-box;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+  .first-staff {
+    border-top: 1px solid grey;
+  }
+
+  .staff-item {
+    border-bottom: 1px solid grey;
+    padding: 15px;
+  }
