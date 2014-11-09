@@ -1,0 +1,64 @@
+<div>
+<div class="row">
+  <div class="col-sm-12">
+    ..
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 box">
+    <div class="row box-header">
+      <div class="col-xs-12">
+        <p class="normal box-title">Add Staff</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <p class="normal">All staff will be notified of abuse reports by the attendees.</p>
+        <div ng-repeat="s in staff">
+          <div class="row staff-item" ng-class="{'first-staff':$first}">
+            <strong>{{s.name}}</strong>
+            <span class="pull-right">{{s.phone}}</span>
+          </div>
+        </div>
+        <div class="row staff-item">
+          <input type="text" placeholder="Name" ng-model="newStaff.name" />
+          <input type="text" placeholder="(555) 555-5555" ng-model="newStaff.phone" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12" style="text-align: center">
+        <button type="button"
+          class="btn btn-default btn-lg custom-button"
+          ng-click="saveStaff()"
+          ng-disabled="newStaff.name === '' || newStaff.phone === ''">Save Staff</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+<br/>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 box">
+    <div class="row box-header">
+      <div class="col-xs-12">
+        <p class="normal box-title">Violations for Event</p>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <div ng-repeat="r in reports">
+          <div class="row staff-item">
+            <strong>{{r.name}}</strong>
+            <a class="btn pull-right btn-default custom-button"
+              ng-href="{{'#/dash/' + conductID + '/report/' + r.reportID}}">Open Report</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
+</div>
