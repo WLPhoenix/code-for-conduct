@@ -15,7 +15,7 @@ defmodule CodeForConduct.Router do
     pipe_through :browser # Use the default browser stack
 
     #get "/", PageController, :idx
-    #get "/", PageController, :index
+    get "/", PageController, :index
     get "/auth", PageController, :auth, as: :page
     get "/eb/evt", CrapController, :list_eb
     post "/conduct", CrapController, :create_conduct
