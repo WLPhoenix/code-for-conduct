@@ -14,9 +14,7 @@ use Mix.Config
 config :phoenix, CodeForConduct.Router,
   url: [host: "example.com"],
   http: [port: System.get_env("PORT")],
-  secret_key_base: "NIBZCfFqI2ug2X7kf28k2bqycK9WBZEZ5vxwjITmqyEiUlHxBXbodEPy0wiqBbgR3SEoRdDb263idwN/lyCAog=="
+  secret_key_base: "S85DauV7FPE/+1e8YkrC7O2WCmAkY02JYdwKfSoxsp4dFqbbquy2dIl+idIVFHi9AxlXMTU7CYogkKpSdaeFTw=="
 
-config :logger, :console,
+config :logger,
   level: :info
-
-config :phoenix, :code_reloader, false
