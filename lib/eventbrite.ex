@@ -26,8 +26,8 @@ defmodule EventBrite do
     end
   end
 
-  defp parse_single_event(%{"name" => %{"text" => name}, "id" => id}) do
-    %{ :id => id, :name => name }
+  defp parse_single_event(%{"name" => %{"text" => name}, "id" => id, "venue" => %{"address" => address}, "start" => %{"local" => starttime}, "end" => %{"local" => endtime}}) do
+    %{ :id => id, :name => name, :address => address, :start => starttime, :end => endtime }
   end
 
   defp parse_events([event|more_events]) do
@@ -39,7 +39,9 @@ defmodule EventBrite do
   end
 
   def get_event_info(token) do
-    case HTTPoison.get("https://www.eventbriteapi.com/v3/users/me/owned_events/?token=#{token}") do
+    u = "https://www.eventbriteapi.com/v3/users/me/owned_events/?token=#{token}"
+    IO.puts u
+    case HTTPoison.get(u) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         case Poison.decode body do
           {:ok, %{"events" => events}} ->

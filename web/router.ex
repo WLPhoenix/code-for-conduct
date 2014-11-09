@@ -15,6 +15,7 @@ defmodule CodeForConduct.Router do
 
     get "/", PageController, :index
     get "/auth", PageController, :auth, as: :page
+    get "/eb/evt", CrapController, :list_eb
     resources "events", EventController do 
       resources "reports", ReportController
     end
