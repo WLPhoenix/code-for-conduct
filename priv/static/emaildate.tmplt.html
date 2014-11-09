@@ -1,0 +1,35 @@
+<div class="row">
+  <div class="col-sm-12">
+    ..
+  </div>
+</div>
+<div class="row">
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8 box">
+    <div class="row box-header">
+      <div class="col-xs-12">
+        <p class="normal box-title">Publish code of conduct</p>
+      </div>
+    </div>
+    <div class="row" style="padding-top:5%">
+      <div class="col-sm-12">
+        <p class="normal">Let us know when you would like us to deliver your
+        Code of Conduct to your attendees.</p>
+        <div class="btn-group">
+          <button ng-click="selection = 0" type="button" class="btn btn-default">1 day before</button>
+          <button ng-click="selection = 1" type="button" class="btn btn-default">Now</button>
+          <button ng-click="selection = 2" type="button" class="btn btn-default">1 week before</button>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12" style="text-align: center">
+        <button type="button"
+          class="btn btn-default btn-lg custom-button"
+          ng-click="save()"
+          ng-disabled="selection == null">Submit</button>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-2"></div>
+</div>
