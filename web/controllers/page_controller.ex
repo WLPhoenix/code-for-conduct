@@ -9,7 +9,7 @@ defmodule CodeForConduct.PageController do
   plug :action
 
   def index(conn, _params) do
-    case get_session(conn, :eb_token) do
+    case get_session(fetch_session(conn), :eb_token) do
       nil ->
         redirect conn, to: CodeForConduct.Router.Helpers.pages_path(:auth)
       token ->
@@ -48,7 +48,7 @@ defmodule CodeForConduct.PageController do
   def auth(conn, %{"code" => code}) do
     IO.puts "i got a code " <> code
     token = get_token(code)
-    conn = put_session(conn, :eb_token, token)
+    put_session(fetch_session(conn), :eb_token, token)
     dest = CodeForConduct.Router.Helpers.pages_path(:index)
     redirect conn, to: "/" # dest doesn't really seem to work right
   end
@@ -57,7 +57,19 @@ defmodule CodeForConduct.PageController do
     IO.puts "just tryin to auth man"
   	env = Application.get_env(:code_for_conduct, CodeForConduct.PageController)
 		client_id = env[:client_id]
-    redirect conn, to: "https://www.eventbrite.com/oauth/authorize?response_type=code&client_id=#{client_id}"
+    url = "https://www.eventbrite.com/oauth/authorize?response_type=code&client_id=#{client_id}"
+    body = "<html><body>You are being <a href=\"#{Phoenix.HTML.html_escape(url)}\">redirected</a>.</body></html>"
+
+    conn
+    |> put_resp_header("Location", url)
+    |> send_resp(302, "text/html", body)
+  end
+
+  defp send_resp(conn, default_status, content_type, body) do
+    conn
+    |> put_resp_content_type(content_type)
+    |> send_resp(conn.status || default_status, body)
+    |> halt()
   end
 
   def not_found(conn, _params) do

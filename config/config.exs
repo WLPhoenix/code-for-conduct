@@ -17,8 +17,9 @@ config :phoenix, CodeForConduct.Router,
 
 # Session configuration
 config :phoenix, CodeForConduct.Router,
-  session: [store: :cookie,
-            key: "_code_for_conduct_key"]
+  cookies: true,
+  session_key: "_code_for_conduct_key",
+  secret_key_base: "ure89auhjlkfdaht98wq"
 
 # Configures Elixir's Logger
 config :logger, :console,
