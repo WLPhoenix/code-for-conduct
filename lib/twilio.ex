@@ -9,24 +9,13 @@ defmodule Twilio do
 	end
 
   def send_sms(to, from, body) do
-    content = %{
-                "To": to,
-                "From": from,
-                "Body": body
-            }
-
-    case Poison.encode content do
-      {:ok, json} ->
-				enc_content = json
-      {:error, r} ->
-				raise r
-    end
-
+    content = "To=#{to}&From=#{from}&Body=#{body}"
 		url = build_url()
-		IO.puts url
-		IO.puts enc_content
 
-    case HTTPoison.post(url, enc_content, [{<<"Content-Type">>, <<"application/json">>}]) do
+		IO.puts url
+		IO.puts content
+
+    case HTTPoison.post(url, content, [{<<"Content-Type">>, <<"application/x-www-form-urlencoded">>}]) do
       {:ok, %HTTPoison.Response{status_code: 200, body: body}} ->
         IO.puts Poison.decode body
       {:ok, %HTTPoison.Response{status_code: 404, body: body}} ->
