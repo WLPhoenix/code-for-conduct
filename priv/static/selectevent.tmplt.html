@@ -19,7 +19,7 @@
             <label for="i{{evt.id}}">
               <strong>{{evt.name}}</strong>
               <br />
-              {{evt.address.address_1}} {{evt.address.address_2}} {{evt.address.city}} {{evt.address.region}} {{evt.address.postal_code}}
+              {{evt.address}}
             </label>
           </li>
         </ol>
@@ -27,10 +27,7 @@
     </div>
     <div class="row">
       <div class="col-sm-12" style="text-align: center">
-        <button type="button"
-          class="btn btn-default btn-lg custom-button"
-          ng-click="goToQuestions()"
-          ng-disabled="!selectedEvent">Next</button>
+        <button type="button" class="btn btn-primary btn-lg" ng-click="goToQuestions()" ng-disabled="!selectedEvent">Next</button>
         <br>
         <a href="">create new event</a>
       </div>
